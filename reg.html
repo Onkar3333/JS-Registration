@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Validation</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 50px; }
+        .error { color: red; font-size: 14px; }
+    </style>
+</head>
+<body>
+
+    <h2>Registration Form</h2>
+    <form onsubmit="return validateForm()">
+        <label>Full Name:</label><br>
+        <input type="text" id="name"><br>
+        <span class="error" id="nameError"></span><br>
+
+        <label>Class:</label><br>
+        <input type="text" id="class"><br>
+        <span class="error" id="classError"></span><br>
+
+        <label>Department:</label><br>
+        <input type="text" id="department"><br>
+        <span class="error" id="deptError"></span><br>
+
+        <label>Address:</label><br>
+        <input type="text" id="address"><br>
+        <span class="error" id="addressError"></span><br>
+
+        <label>Phone Number:</label><br>
+        <input type="text" id="phone"><br>
+        <span class="error" id="phoneError"></span><br>
+
+        <label>Email:</label><br>
+        <input type="text" id="email"><br>
+        <span class="error" id="emailError"></span><br>
+
+        <br>
+        <button type="submit">Submit</button>
+    </form>
+
+    <script>
+        function validateForm() {
+            let isValid = true;
+
+            // Reset previous error messages
+            document.querySelectorAll('.error').forEach(el => el.innerText = "");
+
+            // Get input values
+            let name = document.getElementById("name").value;
+            let cls = document.getElementById("class").value;
+            let department = document.getElementById("department").value;
+            let address = document.getElementById("address").value;
+            let phone = document.getElementById("phone").value;
+            let email = document.getElementById("email").value;
+
+            // Validation logic
+            if (name.trim() === "") {
+                document.getElementById("nameError").innerText = "Full name is required.";
+                isValid = false;
+            }
+            if (cls.trim() === "") {
+                document.getElementById("classError").innerText = "Class is required.";
+                isValid = false;
+            }
+            if (department.trim() === "") {
+                document.getElementById("deptError").innerText = "Department is required.";
+                isValid = false;
+            }
+            if (address.trim() === "") {
+                document.getElementById("addressError").innerText = "Address is required.";
+                isValid = false;
+            }
+            if (!/^\d{10}$/.test(phone)) {
+                document.getElementById("phoneError").innerText = "Enter a valid 10-digit phone number.";
+                isValid = false;
+            }
+            if (!/^\S+@\S+\.\S+$/.test(email)) {
+                document.getElementById("emailError").innerText = "Enter a valid email (e.g., abc@abc.com).";
+                isValid = false;
+            }
+
+            return isValid; // Return false to prevent form submission if validation fails
+        }
+    </script>
+
+</body>
+</html>
